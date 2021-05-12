@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {# Cargamos la librería #}
+	  {% load bootstrap4 %}
+ 
+	  {# CSS Bootstrap #}
+	  {% bootstrap_css %}
+</head>
+<body>
+
+    <div class="container pt-5">
+        
+        <div class="row justify-content-center">
+
+            <div class="col-5 ">
+
+                <p class="h2"> INGRESAR CONTACTO</p>
+                <form action="/contact/" method="POST">{% csrf_token %}
+    
+                    <div class="form-group">
+                        <label for="name"> nombre </label>
+                        <input type="text" name="nombreC" id="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone"> telefono </label>
+                        <input type="text" name="telefonoC" id=""  class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email"> correo </label>
+                        <input type="text" name="correoC" id=""  class="form-control">
+                    </div>
+            
+                    <button type="submit" class="btn btn-primary col-12">enviar</button>
+            
+                </form>
+    
+            </div>
+    
+        </div>
+        <div class="row mt-5">
+            <div class="col">
+
+                <p class="h2">LISTA DE CONTACTOS</p>
+                
+                <table class="table ">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">TELEFONO</th>
+                            <th scope="col">CORREO</th>
+                            <th scope="col">OPERACIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in list_contact %}
+                        
+
+                            <tr >
+                                
+                                <td>{{contact.name_contact}}</td>
+                                <td>{{contact.phone_contact}}</td>
+                                <td>{{contact.email_contact}}</td>
+                                <td><a href="/contact_delete/{{contact.id}}"  class="btn btn-danger mr-2">Eliminar</a>  <a class="btn btn-success">Editar</a></td>
+                            </tr>
+
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+
+   
+   
+    
+        
+
+
+    {% bootstrap_javascript jquery='full' %}
+
+</body>
+</html>
